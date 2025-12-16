@@ -3,6 +3,7 @@ import pygame
 from time import sleep
 import random
 import math
+import sys
 from pygame import mixer
 pygame.init()
 mixer.init()
@@ -511,5 +512,5 @@ while running:
     clock.tick(60)
 
 pygame.quit()
-
 sys.exit()
+
