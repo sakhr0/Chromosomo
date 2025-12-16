@@ -1,12 +1,3 @@
-import os
-import sys
-
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS  # pyInstaller temp folder
-    except Exception:
-        base_path = os.path.abspath(".")
-    return os.path.join(base_path, relative_path)
 
 import pygame
 from time import sleep
@@ -19,14 +10,14 @@ WIDTH, HEIGHT = 2000, 1400
 speed0 = 3
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Chromosomo")
-title_font = pygame.font.Font(resource_path("resources/fonts/pixel_1.ttf"),  150)
-owner_font = pygame.font.SysFont(resource_path('couriernew'), 30)
-button_font = pygame.font.SysFont(resource_path('couriernew'), 40)
-text_font = pygame.font.Font(resource_path("resources/fonts/pixel_2.ttf"), 34)
-text_font2 = pygame.font.SysFont(resource_path('impact'), 50)
-text_font0 = pygame.font.Font(resource_path("resources/fonts/pixel_2.ttf"), 60)
-text2_font = pygame.font.SysFont(resource_path('impact'), 70)
-small_font = pygame.font.SysFont(resource_path('Arial'), 20)
+title_font = pygame.font.Font("pixel_1.ttf",  150)
+owner_font = pygame.font.SysFont('couriernew' , 30)
+button_font = pygame.font.SysFont('couriernew', 40)
+text_font = pygame.font.Font("pixel_2.ttf" , 34)
+text_font2 = pygame.font.SysFont('impact', 50)
+text_font0 = pygame.font.Font("pixel_2.ttf", 60)
+text2_font = pygame.font.SysFont('impact', 70)
+small_font = pygame.font.SysFont('Arial', 20)
 BACKGROUND_COLOR = (20, 20, 40)  
 BLUE = (0, 102, 204)
 PURPLE = (153, 51, 255)
@@ -136,13 +127,13 @@ class Player:
         self.speed = speed0
         self.image = None
         if level == 1 :
-            original_image = pygame.image.load(resource_path('resources/images/chromosome_mono_1.webp')).convert_alpha( )
+            original_image = pygame.image.load('chromosome_mono_1.webp').convert_alpha( )
             self.image = pygame.transform.scale(original_image, (50, 50)) 
         elif level == 2 :
-            original_image = pygame.image.load(resource_path('resources/images/chromosome_bi.webp')).convert_alpha( )
+            original_image = pygame.image.load('chromosome_bi.webp').convert_alpha( )
             self.image = pygame.transform.scale(original_image, (50, 50))
         elif level == 3 :
-            original_image = pygame.image.load(resource_path('resources/images/chromosome_mono_2.webp')).convert_alpha( )
+            original_image = pygame.image.load('chromosome_mono_2.webp').convert_alpha( )
             self.image = pygame.transform.scale(original_image, (50, 50))             
     def draw(self, surface):
         
@@ -222,9 +213,9 @@ play_button = Button(WIDTH//2 - 150, HEIGHT//2 + 100, 300, 60, "PLAY", BLUE, (14
 credits_button = Button(WIDTH//2 - 150, HEIGHT//2  + 170, 300, 60, "CREDITS", (240, 240, 240), (150, 150, 150))
 quit_button = Button(WIDTH//2 - 150, HEIGHT//2 + 240, 300, 60, "QUIT", RED, GREY)
 def draw_start_screen():
-    dna = pygame.image.load (resource_path('resources/images/dna.png'))    
-    chs = pygame.image.load(resource_path('resources/images/chromosomes.webp'))
-    image = pygame.image.load(resource_path("resources/images/background.jpg"))
+    dna = pygame.image.load ('dna.png')    
+    chs = pygame.image.load('chromosomes.webp')
+    image = pygame.image.load("background.jpg")
     screen.blit(image, (0, 0)) 
     screen.blit(image, (700, 0))
     screen.blit(image, (1400, 0))
@@ -249,7 +240,7 @@ def draw_explanation_screen():
     text_y = HEIGHT // 2 - 100
     text_surf1 , text_surf2 , text_surf3 , text_surf4 = text_font.render("Tu joues avec un chromosome dans une labyrinthe ou la Colchicine te chasse .Tu dois atteindre d'abord S=Synthèse pour synthétiser une autre chromatide" , True , WHITE ) , text_font.render ("puis atteindre A = l'Anaphase pour se diviser et à la fin , il faut que tu aies le clé avant que tu iras vers T = Télophase pour completer le cycle cellulaire  " , True, WHITE) , text_font.render("Utilise les flèches directionnelles pour te déplacer. Évite les Colchicines rouges qui te poursuivent. Bonne chance !" , True , WHITE) , text_font.render("(Attention , les Colchicines seront de plus en plus rapide  . . . Choisir La difficulté : ", True , WHITE)
     alarm = text2_font.render('Sois Loin de Colchicine !', True, RED)
-    colchicine = pygame.image.load(resource_path('resources/images/colchicine_monstre.png'))
+    colchicine = pygame.image.load('colchicine_monstre.png')
     colchicine = pygame.transform.scale(colchicine, (300,300))
     screen.blit(colchicine, (WIDTH - WIDTH/6 - 300  , HEIGHT / 2 + 200))
     screen.blit(alarm, (WIDTH/8  , HEIGHT / 2 + 300))
@@ -381,7 +372,7 @@ def draw_win_screen():
 
 def draw_lose_screen():
     screen.fill((52,0,0))
-    chromosome = pygame.image.load(resource_path("resources/images/chromosome_bi.webp"))
+    chromosome = pygame.image.load("chromosome_bi.webp")
     chromosome__ = pygame.transform.scale(chromosome  , (20,20))
     screen.blit(chromosome,(WIDTH//2 - 320, HEIGHT//2 - 250))
     pygame.draw.line(screen, RED, (WIDTH//2 - 100, HEIGHT//2 + 150 ), (WIDTH//2 + 100, HEIGHT//2 - 70), 10)
@@ -520,4 +511,5 @@ while running:
     clock.tick(60)
 
 pygame.quit()
+
 sys.exit()
